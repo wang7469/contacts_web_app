@@ -1,0 +1,69 @@
+﻿<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+      <nav class="navbar navbar-default"  style = "background-color:#660066;">
+          <div class="container-fluid">
+              <ul class="nav navbar-nav">
+                  <li><a href="/"><font color = "white">Home</font></a></li>
+                  <li><a href="/contact"><font color = "white">Contact</font></a></li>
+                  <li><a href="/addContact"><font color = "white">Add Contact</font></a></li>
+                  <li><a href="/stock"><font color = "white">Stock Page</font></a></li>
+                  <li><a href= "/admin"><font color = "white">Admin</font></a></li>
+                  <li><a href = "/logout"><span class = "glyphicon glyphicon-log-out"></span></a></li>
+              </ul>
+          </div>
+      </nav>
+      <br><br>
+      <div class="container">
+          <table border = "1" bordercolor = "white" class="table" id="contactTable">
+              <thead>
+                  <tr>
+                      <th bgcolor = "#E9967A" scope="col">Name</th>
+                      <th bgcolor = "#E9967A" scope="col">Email</th>
+                      <th bgcolor = "#E9967A" scope="col">Address</th>
+                      <th bgcolor = "#E9967A" scope="col">Phone Number</th>
+                      <th bgcolor = "#E9967A" scope="col">Favorite Place</th>
+                  </tr>
+              </thead>
+              <tbody id = "tb"></tbody>
+          </table>
+      </div>
+      <script>
+      // TODO: Fetch contact.json data from the server and display it in the contactTable
+
+        var xmlhttp = new XMLHttpRequest();
+        var url = "/getContact";
+
+        xmlhttp.onreadystatechange = function(){
+          if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            var obj = JSON.parse(xmlhttp.responseText);
+            var contact_arr = obj.res.contact;
+            myFunction(contact_arr);
+          }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+      function myFunction(json){
+          var contact = '';
+          for(var i = 0; i < json.length; i++){
+            contact += "<tr>" + "<td>" + json[i].name + "</td>" +
+                                        "<td>" + json[i].email + "</td>" +
+                                        "<td>" + json[i].address + "</td>" +
+                                        "<td>" + json[i].phoneNumber + "</td>" +
+                                        "<td>" + json[i].favoritePlace + "</td>" + "</tr>";
+
+          }
+          //console.log(contact);
+          document.getElementById('tb').innerHTML = contact;
+
+        }
+      </script>
+  </body>
+</html>

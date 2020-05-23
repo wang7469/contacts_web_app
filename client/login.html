@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="client/css/style.css">
+	    <title></title>
+  </head>
+
+  <body>
+   	<div class="jumbotron" style="background: DarkSeaGreen !important">
+        <h1 style = "text-align:center">Login Page</h1>
+        <p style = "text-align:center">Please enter your user name and password. Both are case sensitive.</p>
+        <br/>
+        <br/>
+      </div>
+
+      <div class="row">
+        <div id = "alert"></div>
+        <form style = "text-align:center" method = "post" action = "/login_submit">
+          <label for = "user">User:</label><br>
+          <input type = "text" id = "username" name = "username" placeholder="Username" required><br>
+          <label for = "password">Password:</label><br>
+          <input type = "text" id = "password" name = "password" placeholder="Password" required><br><br>
+          <input type = "submit" value = "Log In">
+        </form>
+        <br/>
+      </div>
+      <script type = "text/javascript">
+
+      var xmlhttp = new XMLHttpRequest();
+      var url = "/getflag";
+
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+          var obj = xmlhttp.responseText;
+          myFunction(obj);
+        }
+      }
+
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+
+
+    function myFunction(message){
+      if(message == "1"){
+        var alert_message = "<div class = 'alert alert-danger'> Invalid Credentials. Please try again!</div>";
+        document.getElementById("alert").innerHTML = alert_message;
+
+      }
+
+      }
+      </script>
+  </body>
+</html>
