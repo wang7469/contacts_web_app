@@ -1,4 +1,4 @@
-# contacts_wesite
+# contacts_website
 This project establishes both client and server, constructs a website with user administration page and additional user management features. All credentials stored in SQL databases
 
 ##usage
